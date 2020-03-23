@@ -143,13 +143,14 @@ let message = (name) => `Hello, ${name}!`;
 console.log(message('Allie'));
 
 
-let Student = array => ({
-  name : array[0],
-  age : array[1],
-  hometown : array[2],
-});
 
-let joe = Student(['Joe', 'Schmoe', 100]);
+let Student = function(name, age, hometown) {
+  this.name = name;
+  this.age = age;
+  this.hometown = hometown;
+};
+
+let joe = new Student('Joe', 'Schmoe', 100);
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 // Note that the arrow function will cause this code to break!
@@ -159,12 +160,13 @@ console.log(joe);
 
 
 
-let greeting = () => `Hi, my name is ${joe.name}`;
-
+Student.prototype.greeting = function() {
+  return `Hi, my name is ${this.name}`;
+};
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 // Note that the arrow function will cause this method to break!
-console.log(greeting());
+console.log(joe.greeting());
 
 // TODO: After viewing the previous console.log(), return the code to a working state.
 
@@ -175,7 +177,7 @@ Student.courseName = function() {
 };
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-// console.log(Student.courseName());
+console.log(Student.courseName());
 
 
 
@@ -186,17 +188,17 @@ Student.prototype.scope = function() {
 };
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-// console.log(joe.scope());
+console.log(joe.scope());
 
 Student.prototype.scopeArrow = () => console.log(this);
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-// console.log(joe.scopeArrow());
+console.log(joe.scopeArrow());
 
 // TODO: Write a COMMENT below to answer the following questions.
 // 1. What is "this" when joe.scope() is invoked?
-//
+//  This is a reference to student
 // 2. What is "this" when joe.scopeArrow() is invoked?
-//
+//    This is a reference to console window
 // 3. Explain why "this" is different when an arrow function is used.
-//
+//   When the arrow function breaks the scope.
